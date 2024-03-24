@@ -46,7 +46,6 @@ int main(int argc, char **argv) {
     cudaEventCreate(&stop);
     cudaEventRecord(start);
        
-
     // Launch CUDA kernel
     monte_carlo_estimate<<<blocks, threads_per_block>>>(result, num_points);
     cudaDeviceSynchronize();

@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
     clock_t start = clock();
 
     // Generate random points and count those inside the unit circle
-    for (unsigned long long i = 0; i < num_points; i++) {
+    for (int i = 0; i < num_points; i++) {
         double x = (double)rand() / RAND_MAX;
         double y = (double)rand() / RAND_MAX;
         double distance = x * x + y * y;
