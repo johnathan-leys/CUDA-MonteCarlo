@@ -1,4 +1,6 @@
 /*
+Estiamte Pi in parallel using CPU, rather than CUDA cores. 
+Should scale with the number of threads specified by environment variable OMP_NUM_THREADS
 IMPORTANT:
 Make sure to use -fopenmp flag when compiling with gcc.
 This may not work by default on windows, as rand_r is commonly provided with glibc
@@ -11,13 +13,13 @@ This may not work by default on windows, as rand_r is commonly provided with gli
 
 
 // Global
-unsigned long long num_points = 100000000; // Currently 1/10th the number of points as in CUDA example, otherwise takes incredibly long.
+unsigned long long num_points = 100000000; 
 unsigned long long points_in_circle = 0;
 
 
 int main(int argc, char **argv) {
 
-     // Seed the random number generator
+    // Seed the random number generator
     srand(time(NULL));
 
     // Start timing
@@ -25,7 +27,7 @@ int main(int argc, char **argv) {
 
     #pragma omp parallel reduction(+:points_in_circle)  // Reduction, add values from each thread
     {
-        unsigned int seed = omp_get_thread_num();                                                           // Not rubustly thread safe but should work for demo
+        unsigned int seed = omp_get_thread_num();
 
         // Generate random points and count those inside the unit circle
         #pragma omp for

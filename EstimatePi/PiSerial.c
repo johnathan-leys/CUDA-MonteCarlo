@@ -9,7 +9,7 @@ Meant to demonstrate just how fast CUDA can speed up certain processes.
 #include <time.h>
 
 int main(int argc, char **argv) {
-    unsigned long long num_points = 100000000; // Currently 1/10th the number of points as in CUDA example, otherwise takes incredibly long.
+    unsigned long long num_points = 100000000; 
     unsigned long long points_in_circle = 0;
 
     // Seed the random number generator
