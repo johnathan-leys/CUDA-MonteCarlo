@@ -1,5 +1,7 @@
 /*
-Make sure to use -fopenmp flag when compiling with gcc
+IMPORTANT:
+Make sure to use -fopenmp flag when compiling with gcc.
+This may not work by default on windows, as rand_r is commonly provided with glibc
 */
 
 #include <stdio.h>
