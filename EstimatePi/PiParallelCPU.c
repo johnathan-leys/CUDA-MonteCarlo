@@ -1,5 +1,5 @@
 /*
-
+Make sure to use -fopenmp flag when compiling with gcc
 */
 
 #include <stdio.h>
@@ -15,19 +15,21 @@ unsigned long long points_in_circle = 0;
 
 int main(int argc, char **argv) {
 
+     // Seed the random number generator
+    srand(time(NULL));
+
     // Start timing
     double start = omp_get_wtime();
 
     #pragma omp parallel reduction(+:points_in_circle)  // Reduction, add values from each thread
     {
-        unsigned int seed = (unsigned int)time(NULL) + omp_get_thread_num();    // This time seed with thread number. 
-        srand(seed);                                                            // Not rubustly thread safe but should work for demo
+        unsigned int seed = omp_get_thread_num();                                                           // Not rubustly thread safe but should work for demo
 
         // Generate random points and count those inside the unit circle
         #pragma omp for
         for (int i = 0; i < num_points; i++) {
-            double x = (double)rand() / RAND_MAX;
-            double y = (double)rand() / RAND_MAX;
+            double x = (double)rand_r(&seed) / RAND_MAX;
+            double y = (double)rand_r(&seed) / RAND_MAX;
             double distance = x * x + y * y;
             if (distance <= 1.0) {
                 points_in_circle++;
