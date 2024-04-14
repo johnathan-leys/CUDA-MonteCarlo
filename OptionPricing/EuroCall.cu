@@ -4,6 +4,8 @@
 #include <curand.h>
 #include <math.h>
 #include <curand_kernel.h>
+#include <chrono>
+#include <iostream>
 
 // Basic Monte carlo simulation for European option pricing
 
@@ -36,6 +38,7 @@ __global__ void monte_carlo_kernel(float* option_prices, curandState* rand_state
         float S_T = d_S0 * exp((d_r - 0.5f * d_sigma * d_sigma) * d_T + d_sigma * sqrt(d_T) * rand_normal);
         option_prices[path_id] = fmaxf(S_T - d_K, 0.0f);
     }
+
 }
 
 int main() {
@@ -66,9 +69,17 @@ int main() {
     cudaMalloc(&option_prices, NUM_PATHS * sizeof(float));
     cudaMalloc(&rand_states, NUM_PATHS * sizeof(curandState));
 
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     // Launch Monte Carlo kernel
     int num_blocks = (NUM_PATHS + NUM_THREADS - 1) / NUM_THREADS;
     monte_carlo_kernel<<<num_blocks, NUM_THREADS>>>(option_prices, rand_states);
+
+    // Wait for kernel to finish
+    cudaDeviceSynchronize();
+    // End timing
+    auto end_time = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> execution_time = end_time - start_time;
 
     // Compute option price by averaging the payoffs
     option_price = 0.0f;
@@ -82,8 +93,8 @@ int main() {
     option_price /= NUM_PATHS;
     option_price *= exp(-r * T);
 
-
-    printf("Option price: %f\n", option_price);
+    std::cout << "Option price: " << option_price << std::endl;
+    std::cout << "Execution time: " << execution_time.count() << " ms" << std::endl;
 
     // Free memory
     cudaFree(option_prices);
