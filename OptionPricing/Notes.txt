@@ -1,0 +1,2 @@
+Pi is using solely C style, I wanted to use more C++ in this example. I am also using manual CUDA memory management here.
+Simple example, need to add benchmarking.
