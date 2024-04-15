@@ -13,7 +13,7 @@ This may not work by default on windows, as rand_r is commonly provided with gli
 
 
 // Global
-unsigned long long num_points = 1000000000; 
+unsigned long long num_points = 100000000; 
 unsigned long long points_in_circle = 0;
 
 
