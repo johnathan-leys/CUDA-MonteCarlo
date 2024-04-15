@@ -19,6 +19,8 @@ When increasing the number of points 10x, results were as follows:
 | Serial        |   3.141627            | 33.811 s  |
 | OpenMP        |   3.141557            | 951 ms    |
 | CUDA          |   3.141618            | 126.182 ms|
+
+
 OpenMP takes ~10x as long, which is linear and expected, but the CUDA code only takes ~4.5 times as long, which 
 could be due to grid/block layout being better optimized or something in the managed/shared memory.
 For comparison, I ran the CUDA code on my desktop with a GTX 1070Ti, which has 2432 CUDA cores, 9.5x as many as the P400.
