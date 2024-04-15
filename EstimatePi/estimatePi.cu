@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <curand_kernel.h>
+#include <cuda_runtime.h>
 /* 
 Program estimates Pi via Monte Carlo simulation of a set amount of random points inside or outside a circle.
 Each CUDA thread generates a sequence of random points within the unit square.
