@@ -4,9 +4,10 @@ A Monte Carlo simulation to estimate the price of a European Call Option is perf
 
 # Results
 The Pi simulations were ran and benchmarked on a Haswell-EP machine with an Intel(R) Xeon(R) CPU E5-2640 v3 and NVIDIA Quadro P400.
-Results are as follows:
-| Simulation    |   Estimation of Pi    | Time      |
+Results are as follows with 100000000 points simulated:
+| Method        |   Estimation of Pi    | Time      |
 | --------      | -------------------   | -----     |
 | Serial        |   3.141350            | 3.629 s   |
 | OpenMP        |   3.141700            |  94 ms    |
 | CUDA          |    3.141350           | 28.367 ms |
+

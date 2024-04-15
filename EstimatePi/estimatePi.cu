@@ -32,7 +32,7 @@ __global__ void monte_carlo_estimate(unsigned long long *result, unsigned long l
 }
 
 int main(int argc, char **argv) {
-    unsigned long long num_points = 100000000; // Random points to generate
+    unsigned long long num_points = 1000000000; // Random points to generate
     unsigned long long *result;
     cudaMallocManaged(&result, sizeof(unsigned long long)); // Accessible via CPU and GPU
     *result = 0;
