@@ -10,7 +10,7 @@ Results are as follows with 100000000 points simulated:
 | Method        |   Estimation of Pi    | Time      |
 | --------      | -------------------   | -----     |
 | Serial        |   3.141350            | 3.629 s   |
-| OpenMP        |   3.141700            |  94 ms    |
+| OpenMP        |   3.141700            |  249 ms    |
 | CUDA          |   3.141350            | 28.367 ms |
 
 CUDA is clearly the fastest, which is expected due to the 256 CUDA cores on the P400 vs the 8 on the CPU.
@@ -19,7 +19,7 @@ When increasing the number of points 10x, results were as follows:
 | Method        |   Estimation of Pi    | Time      |
 | --------      | -------------------   | -----     |
 | Serial        |   3.141627            | 33.811 s  |
-| OpenMP        |   3.141557            | 951 ms    |
+| OpenMP        |   3.141557            | 2.284 s    |
 | CUDA          |   3.141618            | 126.182 ms|
 
 
